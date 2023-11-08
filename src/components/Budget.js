@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Budget = () => {
-  const { budget, expenses, dispatch } = useContext(AppContext);
+  const { budget, expenses, dispatch, currency } = useContext(AppContext);
   const [newBudget, setNewBudget] = useState(budget)
   const HARD_BUDGET_LIMIT = 20000;
   const TOTAL_EXPENSES = expenses.reduce( (total, item) => total + item.cost, 0)
@@ -50,7 +50,7 @@ const Budget = () => {
         flex-grow-0 
         flex-shrink-0
       `}>
-        Budget: $
+        Budget: {currency}
       </p>
       <input 
         type='number' 
