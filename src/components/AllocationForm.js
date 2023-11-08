@@ -6,14 +6,14 @@ const AllocationForm = (props) => {
     const { dispatch,remaining  } = useContext(AppContext);
 
     const [name, setName] = useState('');
-    const [cost, setCost] = useState('');
+    const [cost, setCost] = useState(0);
     const [action, setAction] = useState('');
 
     const submitEvent = () => {
       //check to see if exceeded budget
       if(cost > remaining) {
           alert("The value cannot exceed remaining funds $"+remaining);
-          setCost("");
+          setCost(0);
           return;
       }
 
@@ -61,13 +61,14 @@ const AllocationForm = (props) => {
                 </select>
 
                   <input
-                      required='required'
-                      type='number'
-                      id='cost'
-                      value={cost}
-                      style={{ marginLeft: '2rem' , size: 10}}
-                      onChange={(event) => setCost(event.target.value)}>
-                      </input>
+                    required='required'
+                    type='number'
+                    id='cost'
+                    value={cost}
+                    style={{ marginLeft: '2rem' , size: 10}}
+                    onChange={(event) => event.target.validity && setCost(event.target.valueAsNumber)} 
+                  >
+                  </input>
 
                   <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
                       Save
