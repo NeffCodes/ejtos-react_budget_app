@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext";
 
 const Remaining = () => {
   const {expenses, budget} = useContext(AppContext);
-  
+  console.log('remaing', budget)
   const totalExpenses = expenses.reduce( (total, item) => total + item.cost, 0)
   const alertType = totalExpenses > budget ?
     'alert-danger' :

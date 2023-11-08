@@ -3,10 +3,36 @@ import { useState, useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Budget = () => {
-  const { budget } = useContext(AppContext);
+  const { budget, expenses, dispatch } = useContext(AppContext);
   const [newBudget, setNewBudget] = useState(budget)
+  const HARD_BUDGET_LIMIT = 20000;
+  const TOTAL_EXPENSES = expenses.reduce( (total, item) => total + item.cost, 0)
 
-  const handleBudgetChange = event => setNewBudget(event.target.value);
+
+  const handleBudgetChange = event => {
+    let val = event.target.valueAsNumber;
+
+    //budget cannot exceed limit
+    if(val > HARD_BUDGET_LIMIT) {
+      alert('The budget value cannot exceed $'+ HARD_BUDGET_LIMIT);
+      setNewBudget(HARD_BUDGET_LIMIT);
+      val = HARD_BUDGET_LIMIT;
+    }
+
+    //budget cannot be lower than expenses
+    if(val < TOTAL_EXPENSES) {
+      alert('You cannot reduce the budge value lower than the spending');
+      setNewBudget(TOTAL_EXPENSES);
+      val = TOTAL_EXPENSES;
+    }
+
+    //set budget
+    setNewBudget(val);  
+    dispatch({
+      type:'SET_BUDGET',
+      payload: val
+    })
+  };
 
   return (
     <div className={`
@@ -30,6 +56,8 @@ const Budget = () => {
         type='number' 
         step='10' 
         value={newBudget} 
+        min={TOTAL_EXPENSES}
+        max={HARD_BUDGET_LIMIT}
         onChange={handleBudgetChange}
         className='p-2 '
       />

@@ -59,7 +59,7 @@ export const AppReducer = (state, action) => {
             };
         case 'SET_BUDGET':
             action.type = "DONE";
-            state.budget = action.payload;
+            state.budget = Number.isNaN(action.payload) ? 0 : action.payload;
 
             return {
                 ...state,
