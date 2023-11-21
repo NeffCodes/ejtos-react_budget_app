@@ -2,6 +2,12 @@ import React, {useContext} from "react";
 import { AppContext } from "../context/AppContext";
 import { TiDelete, TiMinus, TiPlus } from 'react-icons/ti';
 
+const btnStyle = {
+  aspectRatio: '1/1', 
+  height: '100%', 
+  padding: 0
+}
+
 const ExpenseItem = (props) => {
   const {dispatch,currency} = useContext(AppContext);
 
@@ -37,28 +43,28 @@ const ExpenseItem = (props) => {
   }
 
   return (
-    <tr>
+    <tr >
       <td>{props.name}</td>
       
       <td>{currency} {props.cost}</td>
 
       <td>
         <button 
-        className="btn btn-success rounded-circle" 
-        style={{aspectRatio: '1/1', height: '100%'}}
+        className="btn btn-success rounded-circle btn-sm" 
+        style={btnStyle}
         onClick={event=> increaseAllocation(props.name)}
         >
-          <TiPlus size='1.5em'/>
+          <TiPlus size='2em'/>
         </button>
       </td>
       
       <td>        
         <button 
-        className="btn btn-danger rounded-circle" 
-        style={{aspectRatio: '1/1', height: '100%'}}
+        className="btn btn-danger rounded-circle btn-sm" 
+        style={btnStyle}
         onClick={event=> decreaseAllocation(props.name)}
         >
-          <TiMinus size='1.5em'/>
+          <TiMinus size='2em'/>
         </button>
       </td>
       <td>

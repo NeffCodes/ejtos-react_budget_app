@@ -41,10 +41,9 @@ const Budget = () => {
       d-flex 
       flex-row 
       justify-content-center 
-      gap-2
     `}>
       <p className={`
-        p-2 
+        px-2 
         m-0 
         fw-bold 
         flex-grow-0 
@@ -59,7 +58,8 @@ const Budget = () => {
         min={TOTAL_EXPENSES}
         max={HARD_BUDGET_LIMIT}
         onChange={handleBudgetChange}
-        className='p-2 '
+        className='px-2'
+        style={{margin:0, padding:0}}
       />
     </div>
   );
